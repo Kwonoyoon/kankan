@@ -1,0 +1,24 @@
+.empty{ color: var(--ink-soft); font-size: 14.5px; padding: 20px 0; }
+
+.list{ list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.space{ font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.time{ font-size: 13px; color: var(--ink-soft); }
+
+.cancelBtn{
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  padding: 7px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+}
+.cancelBtn:hover{ border-color: var(--ink); color: var(--ink); }

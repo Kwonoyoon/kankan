@@ -1,0 +1,59 @@
+.topbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background .25s ease, border-color .25s ease;
+}
+.topbar.scrolled{
+  background: var(--cream);
+  border-bottom-color: var(--line);
+}
+.inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+.logo{
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Fraunces', serif;
+  color: #fff;
+  transition: color .25s ease;
+}
+.topbar.scrolled .logo{ color: var(--ink); }
+.right{ display: flex; align-items: center; gap: 18px; }
+.authLink{
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  transition: color .25s ease;
+}
+.topbar.scrolled .authLink{ color: var(--ink-soft); }
+.authLink:hover{ color: var(--gold); }
+.pillCta{
+  background: var(--ink);
+  color: var(--cream);
+  padding: 11px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.pillCta:hover{ background: var(--gold-deep); }
+.menuToggle{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  transition: color .25s ease;
+}
+.topbar.scrolled .menuToggle{ color: var(--ink); }
+.bars{ display: flex; flex-direction: column; gap: 4px; }
+.bars span{ width: 22px; height: 2px; background: #fff; display: block; transition: background .25s ease; }
+.topbar.scrolled .bars span{ background: var(--ink); }

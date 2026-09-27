@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Song+Myung&display=swap');
+
+:root{
+  --ink:#1F3B2E;
+  --ink-soft:#5b6b62;
+  --cream:#F7F5EF;
+  --card:#ffffff;
+  --line:#E4E0D4;
+  --gold:#D9A441;
+  --gold-deep:#B9862E;
+  --green-tint:#EAF2ED;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+body{
+  font-family:'Inter', -apple-system, 'Malgun Gothic', sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.55;
+}
+
+h1,h2,h3{ font-family:'Fraunces', serif; letter-spacing:-0.01em; }
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; color:inherit; cursor:pointer; border:none; background:none; }
+button:disabled{ opacity:.45; cursor:not-allowed; }
+
+.wrap{ max-width:1160px; margin:0 auto; padding:0 32px; }

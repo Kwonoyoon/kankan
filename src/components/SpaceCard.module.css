@@ -1,0 +1,52 @@
+.card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(20,30,24,0.08);
+  transition: transform .2s ease;
+}
+.card:hover{ transform: translateY(-4px); }
+
+.thumb{
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.priceChip{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.body{ padding: 18px; }
+.branch{ font-size: 12px; color: var(--ink-soft); margin-bottom: 4px; }
+.body h4{ font-size: 16px; margin-bottom: 8px; }
+.desc{ font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; line-height: 1.5; }
+.meta{
+  display: flex;
+  gap: 14px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+.reserveBtn{
+  width: 100%;
+  margin-top: 14px;
+  padding: 11px;
+  border-radius: 30px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.reserveBtn:hover{ background: var(--gold-deep); }

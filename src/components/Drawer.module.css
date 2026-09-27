@@ -1,0 +1,135 @@
+.overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(31,59,46,0.35);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+.overlay.open{ opacity: 1; pointer-events: auto; }
+
+.drawer{
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(920px, 92vw);
+  background: var(--cream);
+  z-index: 301;
+  transform: translateX(100%);
+  transition: transform .3s ease;
+  display: flex;
+}
+.drawer.open{ transform: translateX(0); }
+
+.closeBtn{
+  position: absolute;
+  top: 26px;
+  right: 32px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav{
+  width: 38%;
+  border-right: 1px solid var(--line);
+  padding: 90px 0 24px 40px;
+  display: flex;
+  flex-direction: column;
+}
+.navItem{
+  padding: 14px 0;
+  font-size: 19px;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-align: left;
+}
+.navItem.active, .navItem:hover{ color: var(--ink); }
+
+.quickLinks{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.quickLinks a, .quickLinks button{
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+  text-align: left;
+}
+.quickLinks a:hover, .quickLinks button:hover{ color: var(--ink); }
+
+.ctaGroup{ margin-top: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 30px; }
+.ctaGroup a, .ctaGroup button{ text-align: center; padding: 13px; border-radius: 30px; font-size: 14px; font-weight: 600; }
+.ctaGroup a.primary, .primary{ background: var(--gold); color: var(--ink); }
+.ctaGroup a.secondary, .secondary{ border: 1.5px solid var(--ink); }
+
+.planStatus{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.planStatus strong{ color: var(--ink); }
+.planStatus button{
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  padding: 6px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+}
+.planStatus button:hover{ border-color: var(--ink); color: var(--ink); }
+
+.panel{ flex: 1; padding: 90px 40px 24px; overflow-y: auto; }
+.panel img{
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.panel ul{ list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.panel li a, .panel li button{
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 11px 0;
+  font-size: 15.5px;
+  border-bottom: 1px solid var(--line);
+}
+.panel li a:hover, .panel li button:hover{ color: var(--gold-deep); }
+
+.subhead{
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  margin: 28px 0 12px;
+}
+
+.infoList{ list-style: none; display: flex; flex-direction: column; }
+.infoItem{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.infoTag{ flex-shrink: 0; width: 40px; font-size: 12px; color: var(--gold-deep); font-weight: 700; }
+.infoTitle{ flex: 1; }
+.infoDate{ flex-shrink: 0; font-size: 12.5px; color: var(--ink-soft); }
+
+@media (max-width: 900px){
+  .drawer{ width: 100vw; }
+  .nav{ width: 100%; }
+  .panel{ display: none; }
+}
