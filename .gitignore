@@ -12,6 +12,16 @@ dist
 dist-ssr
 *.local
 
+# 비밀번호가 들어가는 파일. 저장소가 public이라 절대 올리면 안 된다.
+.env
+.env.*
+!.env.example
+
+# Spring Boot / Gradle
+backend/build
+backend/.gradle
+backend/bin
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

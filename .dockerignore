@@ -1,0 +1,9 @@
+# nginx 이미지는 저장소 루트를 컨텍스트로 쓴다. 프론트 빌드에 필요 없는 걸 보내지 않아서
+# 빌드가 빨라지고, 비밀번호가 든 .env 가 이미지에 들어가는 것도 막는다.
+node_modules
+dist
+backend
+.git
+.env
+.env.*
+!.env.example
