@@ -34,4 +34,12 @@ public interface SpaceRepository extends JpaRepository<Space, String> {
 			where s.id = :id and s.active = true
 			""")
 	Optional<Space> findActiveById(@Param("id") String id);
+
+	// 관리자 목록은 숨긴(active=false) 공간도 보여야 한다. 태그·편의시설은 필요 없어서 지점만 join fetch 한다.
+	@Query("""
+			select s from Space s
+			join fetch s.branch
+			order by s.branch.id, s.id
+			""")
+	List<Space> findAllForAdmin();
 }

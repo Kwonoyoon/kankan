@@ -1,0 +1,155 @@
+.page{ min-height: 100vh; background: var(--cream); }
+
+.topbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 var(--edge-pad);
+  height: 64px;
+  background: var(--surface-dark);
+  color: var(--on-dark);
+}
+.brand{ font-family: var(--font-logo); font-size: 20px; font-weight: 700; color: inherit; cursor: pointer; text-align: left; }
+.brand:hover{ opacity: .85; }
+.brand span{ font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--gold); margin-left: 6px; }
+.topRight{ display: flex; align-items: center; gap: 16px; font-size: 13.5px; }
+.topRight button{ font-weight: 600; }
+.topRight button:hover{ color: var(--gold); }
+.who{ opacity: .8; }
+
+.main{ padding: 28px var(--edge-pad) 48px; }
+
+.loginCard{
+  max-width: 380px;
+  margin: 48px auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.loginCard h2{ font-size: 22px; }
+.loginCard label{ display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--ink-soft); }
+.loginCard input{ font: inherit; font-weight: 400; color: var(--ink); padding: 11px 12px; border: 1px solid var(--line); border-radius: 8px; }
+.notice{ font-size: 13.5px; background: var(--green-tint); border-radius: 8px; padding: 10px 12px; }
+.notice button{ margin-left: 8px; font-weight: 700; text-decoration: underline; }
+.error{ font-size: 13.5px; color: var(--err-fg); background: var(--err-bg); border-radius: 8px; padding: 10px 12px; }
+.primary{ padding: 13px; border-radius: 30px; background: var(--gold); color: var(--on-gold); font-weight: 600; }
+.primary:hover{ background: #f0b854; }
+
+.dashboard{
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.panel{ background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; min-width: 0; }
+.panel h2{ font-size: 18px; margin-bottom: 14px; }
+.panelHead{ display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.panelHead h2{ margin-bottom: 14px; }
+
+.userList{ list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 6px; max-height: 70vh; overflow-y: auto; }
+.userRow{
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+.userRow:hover{ background: var(--cream); }
+.userRow.selected{ background: var(--green-tint); border-color: var(--ink); }
+.userName{ font-weight: 700; font-size: 14.5px; }
+.userMeta{ font-size: 12.5px; color: var(--ink-soft); overflow-wrap: anywhere; }
+.badge{ font-style: normal; font-size: 11px; font-weight: 700; background: var(--ink); color: var(--cream); border-radius: 10px; padding: 2px 8px; margin-left: 8px; }
+
+.dateFilter{ display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 14px; }
+.dateFilter input{ font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; }
+.dateFilter button{ font-size: 12.5px; text-decoration: underline; }
+
+.tableWrap{ overflow-x: auto; }
+table{ width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th{ text-align: left; font-size: 12px; color: var(--ink-soft); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td{ padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+/* 이용 일시와 시각은 줄바꿈되면 읽기 어려워서 한 줄로 둔다. 나머지는 좁은 화면에서 줄바꿈해 가로 스크롤을 줄인다. */
+.nowrap{ white-space: nowrap; }
+.sub{ font-size: 12px; color: var(--ink-soft); }
+.empty{ text-align: center; color: var(--ink-soft); padding: 28px 10px; }
+.canceled td{ color: var(--ink-soft); text-decoration: line-through; }
+.canceled .sub{ text-decoration: line-through; }
+.cancelBtn{ font-size: 12.5px; font-weight: 600; color: var(--err-fg); text-decoration: underline; }
+
+@media (max-width: 860px){
+  .dashboard{ grid-template-columns: 1fr; }
+  .who{ display: none; }
+}
+
+/* ---- 탭 ---- */
+.tabs{ display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+.tab{ padding: 9px 18px; border-radius: 30px; font-size: 14px; font-weight: 600; color: var(--ink-soft); border: 1px solid var(--line); background: var(--card); }
+.tab:hover{ color: var(--ink); border-color: var(--ink); }
+.tabOn, .tabOn:hover{ background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+/* ---- 공통 ---- */
+.note{ font-size: 13px; color: var(--ink-soft); margin-bottom: 14px; }
+.okMsg{ font-size: 13.5px; color: var(--ok-fg); background: var(--green-tint); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; }
+
+/* ---- 통계 ---- */
+.statsWrap{ display: flex; flex-direction: column; gap: 16px; }
+.cards{ display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+.card{ background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.cardLabel{ font-size: 13px; color: var(--ink-soft); font-weight: 600; margin-bottom: 6px; }
+.cardValue{ font-family: var(--font-display); font-size: 26px; font-weight: 600; }
+.rank{ list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.rankHead{ display: flex; justify-content: space-between; gap: 12px; font-size: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+.rankHead em{ font-style: normal; margin-left: 6px; }
+.bar{ height: 8px; background: var(--cream); border-radius: 8px; overflow: hidden; }
+.bar span{ display: block; height: 100%; background: var(--gold); border-radius: 8px; }
+
+/* ---- 공간 관리 ---- */
+.numInput{ width: 110px; font: inherit; padding: 7px 8px; border: 1px solid var(--line); border-radius: 8px; }
+.toggle{ display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; }
+.saveBtn{ padding: 7px 16px; border-radius: 20px; background: var(--gold); color: var(--on-gold); font-size: 13px; font-weight: 600; }
+.saveBtn:hover:not(:disabled){ background: #f0b854; }
+
+/* ---- 예약 막기 ---- */
+.blockGrid{ display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: 20px; align-items: start; }
+.formField{ display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--ink-soft); margin-bottom: 16px; }
+.formField input, .formField select{ font: inherit; font-weight: 400; color: var(--ink); padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+.hourGrid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.hourBtn{ padding: 8px 0; border: 1px solid var(--line); border-radius: 8px; font-size: 13px; font-weight: 600; background: var(--card); }
+.hourBtn:hover{ border-color: var(--ink); }
+.hourOn, .hourOn:hover{ background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.panel .primary{ width: 100%; }
+
+@media (max-width: 860px){
+  .blockGrid{ grid-template-columns: 1fr; }
+}
+
+/* ---- 문의 ---- */
+.inquiryList{ display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+.inquiry{ border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--card); }
+.inquiryHead{ display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.statusBadge{ font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: var(--err-bg); color: var(--err-fg); }
+.statusDone{ background: var(--green-tint); color: var(--ok-fg); }
+.inquiryTitle{ font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.inquiryBody{ font-size: 13.5px; color: var(--ink-soft); white-space: pre-wrap; overflow-wrap: anywhere; margin-bottom: 12px; }
+.answerBox{ width: 100%; font: inherit; font-size: 14px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; resize: vertical; }
+.answerActions{ display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+
+/* ---- 공간·지점 추가 ---- */
+.formsGrid{ display: grid; grid-template-columns: minmax(300px, 1fr) minmax(280px, 380px); gap: 20px; align-items: start; margin-top: 20px; }
+.twoCols{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.chips{ display: flex; flex-wrap: wrap; gap: 6px; }
+.chips .hourBtn{ padding: 8px 12px; }
+.formField textarea{ font: inherit; font-weight: 400; color: var(--ink); padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); resize: vertical; }
+.preview{ width: 100%; height: 150px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); margin-bottom: 14px; background: var(--cream); }
+
+@media (max-width: 860px){
+  .formsGrid{ grid-template-columns: 1fr; }
+}

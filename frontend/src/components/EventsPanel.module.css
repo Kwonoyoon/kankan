@@ -1,0 +1,52 @@
+.subhead{ font-family: var(--font-display); font-size: 16px; margin: 4px 0 12px; }
+.subhead:not(:first-child){ margin-top: 28px; }
+
+.list{ list-style: none; display: flex; flex-direction: column; }
+/* 서랍(Drawer.module.css)의 '.panel ul' 이 gap을 2px로 덮어써서 gap 대신 margin으로 간격을 준다. */
+.list > li + li{ margin-top: 8px; }
+.event{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+.body{ flex: 1; min-width: 0; }
+.title{ font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.desc{ font-size: 13px; color: var(--ink-soft); margin-bottom: 6px; }
+.period{ font-size: 12px; color: var(--gold-deep); }
+/* '.event .claimBtn' 처럼 선택자를 두 겹으로 쓴 이유: 서랍의 '.panel li button'(메뉴 줄용: width 100%, 아래 줄 등)이
+   우선순위가 더 높아서, 한 겹짜리 '.claimBtn' 은 지고 버튼이 가로 전체를 차지해 카드가 찌그러졌다. */
+.event .claimBtn{
+  display: inline-block;
+  flex-shrink: 0;
+  width: auto;
+  padding: 9px 16px;
+  border-bottom: none;
+  border-radius: 20px;
+  background: var(--gold);
+  color: var(--on-gold);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+.event .claimBtn:hover{ background: #f0b854; color: var(--ink); }
+.event .claimBtn:disabled{ background: var(--line); color: var(--ink-soft); opacity: 1; }
+
+.empty{ color: var(--ink-soft); font-size: 14px; }
+.coupon{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px dashed var(--gold-deep);
+  border-radius: 10px;
+  font-size: 14px;
+}
+.coupon.used{ opacity: .5; }
+.code{ font-weight: 700; letter-spacing: .06em; font-size: 13px; }
+.state{ margin-left: auto; font-size: 12px; color: var(--ink-soft); }

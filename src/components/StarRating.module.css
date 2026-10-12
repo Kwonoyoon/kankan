@@ -1,4 +1,0 @@
-.stars{ display: inline-flex; gap: 1px; font-size: 14px; line-height: 1; }
-.on{ color: var(--gold); }
-.off{ color: var(--line); }
-.btn{ font-size: 22px; line-height: 1; padding: 2px; }

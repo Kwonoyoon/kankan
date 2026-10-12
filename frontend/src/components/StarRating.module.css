@@ -1,0 +1,5 @@
+.stars{ display: inline-flex; gap: 1px; font-size: 14px; line-height: 1; }
+/* 채운 별은 진한 금색(--gold-deep)을 쓴다. 밝은 금색은 흰 카드 위에서 대비가 2:1대라 점수가 잘 안 보인다. */
+.on{ color: var(--gold-deep); }
+.off{ color: var(--line); }
+.btn{ font-size: 22px; line-height: 1; padding: 2px; }

@@ -30,6 +30,16 @@ public class Branch {
 	protected Branch() {
 	}
 
+	public static Branch create(String name, String address, int openHour, int closeHour) {
+		Branch b = new Branch();
+		b.id = "br-" + java.util.UUID.randomUUID().toString().substring(0, 8);
+		b.name = name;
+		b.address = address;
+		b.openHour = openHour;
+		b.closeHour = closeHour;
+		return b;
+	}
+
 	public String getId() {
 		return id;
 	}

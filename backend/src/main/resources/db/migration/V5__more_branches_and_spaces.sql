@@ -1,0 +1,117 @@
+-- 샘플 공간을 늘린 데이터. 컨셉·지점·편의시설별로 필터가 의미 있도록 6개 공간 → 23개로 확장한다.
+-- V2와 마찬가지로 마이그레이션이라 어느 환경에서든 적용되는 샘플이다. 실서비스 전에는 운영 데이터로 교체해야 한다.
+-- 이미지는 /rooms/ 아래 파일을 가리킨다. .jpg는 직접 찍은 사진, .svg는 임시로 그린 일러스트라서
+-- 실제 사진이 생기면 같은 이름으로 바꾸거나 관리자 화면에서 공간의 이미지 경로를 바꾸면 된다.
+
+INSERT INTO branches (id, name, address, open_hour, close_hour) VALUES
+    ('seongsu', '성수점', '서울 성동구 아차산로 91', 7, 24),
+    ('sinchon', '신촌점', '서울 서대문구 신촌로 35', 7, 24);
+
+INSERT INTO concept_tags (id, name) VALUES
+    ('record',  '녹음·팟캐스트'),
+    ('party',   '파티룸'),
+    ('meeting', '회의실'),
+    ('class',   '클래스·워크숍');
+
+INSERT INTO amenities (id, name) VALUES
+    ('projector',  '빔프로젝터'),
+    ('speaker',    '스피커'),
+    ('sofa',       '소파'),
+    ('kitchen',    '주방'),
+    ('wifi',       '와이파이'),
+    ('tv',         'TV'),
+    ('soundproof', '방음'),
+    ('audio-if',   '오디오 인터페이스'),
+    ('backdrop',   '배경지'),
+    ('parking',    '주차');
+
+INSERT INTO spaces (id, branch_id, name, description, capacity, price, images, is_active) VALUES
+    ('sp-7', 'hongdae', '3번 합주실',
+     '드럼·앰프·마이크가 갖춰진 8인 합주실이에요. 팀 연습과 리허설에 넉넉한 크기예요.',
+     8, 15000, '/rooms/band-practice.jpg', 1),
+    ('sp-8', 'seongsu', '밴드룸 라이브',
+     '무대 조명이 있는 10인 합주실이에요. 공연 전 최종 리허설을 하기 좋아요.',
+     10, 18000, '/rooms/band-practice.jpg', 1),
+    ('sp-9', 'sinchon', '보컬 연습실 2',
+     '방음부스가 있는 소형 보컬 연습실이에요. 혼자 또는 레슨 용도로 부담 없이 쓸 수 있어요.',
+     3, 8000, '/rooms/vocal.jpg', 1),
+    ('sp-10', 'seongsu', '댄스 스튜디오 C',
+     '전면 거울과 스피커를 갖춘 15인 댄스 스튜디오예요. 안무 연습과 수업에 맞아요.',
+     15, 20000, '/rooms/dance.jpg', 1),
+    ('sp-11', 'sinchon', '1인 집중석',
+     '조용하게 혼자 집중할 수 있는 2인 이하 스터디룸이에요. 콘센트와 와이파이가 있어요.',
+     2, 5000, '/rooms/studyroom.jpg', 1),
+    ('sp-12', 'hongdae', '스터디룸 B',
+     '6인이 함께 쓰는 스터디룸이에요. 화이트보드가 있어서 팀 프로젝트나 모임에도 좋아요.',
+     6, 10000, '/rooms/studyroom.jpg', 1),
+    ('sp-13', 'gangnam', '회의실 프라임',
+     '빔프로젝터와 화이트보드를 갖춘 8인 회의실이에요. 외부 미팅이나 발표에 알맞아요.',
+     8, 18000, '/rooms/meeting-1.svg', 1),
+    ('sp-14', 'seongsu', '미팅 라운지',
+     '소파와 TV가 있는 6인 편안한 미팅 공간이에요. 가벼운 회의와 스터디 모임에 좋아요.',
+     6, 14000, '/rooms/meeting-2.svg', 1),
+    ('sp-15', 'hongdae', '팟캐스트 부스',
+     '방음 처리된 4인 녹음 부스예요. 마이크와 오디오 인터페이스가 준비되어 있어요.',
+     4, 16000, '/rooms/record-1.svg', 1),
+    ('sp-16', 'konkuk', '녹음 스튜디오 A',
+     '방음부스와 오디오 인터페이스를 갖춘 3인 녹음 스튜디오예요. 보컬 녹음과 낭독에 맞아요.',
+     3, 22000, '/rooms/record-2.svg', 1),
+    ('sp-17', 'seongsu', '파티룸 블룸',
+     '주방과 소파, 스피커가 있는 12인 파티룸이에요. 생일 파티와 소규모 모임에 좋아요.',
+     12, 30000, '/rooms/party-1.svg', 1),
+    ('sp-18', 'sinchon', '파티룸 네온',
+     '네온 조명과 빔프로젝터가 있는 16인 파티룸이에요. 영상을 함께 보며 모임을 하기 좋아요.',
+     16, 35000, '/rooms/party-2.svg', 1),
+    ('sp-19', 'konkuk', '촬영 스튜디오 화이트',
+     '흰 배경지와 조명이 세팅된 10인 촬영 스튜디오예요. 제품·프로필 촬영에 알맞아요.',
+     10, 25000, '/rooms/shoot-studio.jpg', 1),
+    ('sp-20', 'gangnam', '클래스룸 원데이',
+     '빔프로젝터와 화이트보드가 있는 12인 클래스룸이에요. 원데이 클래스와 강의에 좋아요.',
+     12, 17000, '/rooms/class-1.svg', 1),
+    ('sp-21', 'sinchon', '워크숍 라운지',
+     '20인까지 쓸 수 있는 워크숍 공간이에요. 스피커와 빔프로젝터로 세미나도 진행할 수 있어요.',
+     20, 24000, '/rooms/class-2.svg', 1),
+    ('sp-22', 'seongsu', '세미나실 301',
+     '대형 스크린과 화면공유 장비를 갖춘 20인 세미나실이에요. 발표와 설명회에 알맞아요.',
+     20, 28000, '/rooms/seminar.jpg', 1),
+    ('sp-23', 'gangnam', '촬영 미팅룸 2',
+     '6인용 소형 촬영·미팅룸이에요. 가벼운 촬영과 회의를 한 곳에서 할 수 있어요.',
+     6, 13000, '/rooms/shoot-studio.jpg', 1);
+
+INSERT INTO space_tags (space_id, tag_id) VALUES
+    ('sp-7', 'band'),
+    ('sp-8', 'band'),
+    ('sp-9', 'vocal'),
+    ('sp-10', 'dance'),
+    ('sp-11', 'study'),
+    ('sp-12', 'study'), ('sp-12', 'meeting'),
+    ('sp-13', 'meeting'),
+    ('sp-14', 'meeting'), ('sp-14', 'study'),
+    ('sp-15', 'record'),
+    ('sp-16', 'record'), ('sp-16', 'vocal'),
+    ('sp-17', 'party'),
+    ('sp-18', 'party'),
+    ('sp-19', 'shoot'),
+    ('sp-20', 'class'),
+    ('sp-21', 'class'), ('sp-21', 'seminar'),
+    ('sp-22', 'seminar'),
+    ('sp-23', 'shoot'), ('sp-23', 'meeting');
+
+INSERT INTO space_amenities (space_id, amenity_id) VALUES
+    ('sp-7', 'drum'), ('sp-7', 'amp'), ('sp-7', 'mic'), ('sp-7', 'soundproof'),
+    ('sp-8', 'drum'), ('sp-8', 'amp'), ('sp-8', 'mic'), ('sp-8', 'lighting'),
+    ('sp-9', 'mic'), ('sp-9', 'booth'), ('sp-9', 'piano'),
+    ('sp-10', 'mirror-wall'), ('sp-10', 'wood-floor'), ('sp-10', 'speaker'),
+    ('sp-11', 'outlet'), ('sp-11', 'wifi'),
+    ('sp-12', 'whiteboard'), ('sp-12', 'outlet'), ('sp-12', 'wifi'),
+    ('sp-13', 'projector'), ('sp-13', 'whiteboard'), ('sp-13', 'screen-share'),
+    ('sp-14', 'tv'), ('sp-14', 'sofa'), ('sp-14', 'wifi'), ('sp-14', 'outlet'),
+    ('sp-15', 'mic'), ('sp-15', 'soundproof'), ('sp-15', 'audio-if'),
+    ('sp-16', 'mic'), ('sp-16', 'booth'), ('sp-16', 'audio-if'),
+    ('sp-17', 'speaker'), ('sp-17', 'lighting'), ('sp-17', 'kitchen'), ('sp-17', 'sofa'),
+    ('sp-18', 'speaker'), ('sp-18', 'lighting'), ('sp-18', 'projector'),
+    ('sp-19', 'lighting'), ('sp-19', 'backdrop'), ('sp-19', 'outlet'),
+    ('sp-20', 'projector'), ('sp-20', 'whiteboard'), ('sp-20', 'outlet'),
+    ('sp-21', 'projector'), ('sp-21', 'speaker'), ('sp-21', 'whiteboard'), ('sp-21', 'parking'),
+    ('sp-22', 'screen'), ('sp-22', 'whiteboard'), ('sp-22', 'screen-share'),
+    ('sp-23', 'lighting'), ('sp-23', 'screen-share'), ('sp-23', 'backdrop');

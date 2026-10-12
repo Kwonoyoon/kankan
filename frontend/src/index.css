@@ -1,0 +1,117 @@
+/* 글꼴: 본문·제목은 Pretendard 하나로 통일한다.
+   이전에는 영문 전용 글꼴(Fraunces)을 제목에 써서 한글만 다른 글꼴로 대체되어 글자 모양이 섞여 보였다.
+   한글을 제대로 가진 글꼴 하나로 쓰는 게 정돈돼 보인다. 영문 로고(kany)에만 Fraunces를 쓴다. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&display=swap');
+
+:root{
+  --font-sans:'Pretendard Variable', Pretendard, -apple-system, 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+  --font-display:var(--font-sans);
+  --font-logo:'Fraunces', Georgia, serif;
+
+  --ink:#1F3B2E;          /* 글자색. 버튼처럼 "배경으로도" 쓰이므로 --cream과 한 쌍으로 뒤집힌다 */
+  --ink-soft:#5b6b62;
+  --cream:#F7F5EF;        /* 페이지 배경 */
+  --card:#ffffff;
+  --line:#E4E0D4;
+  --gold:#D9A441;
+  --gold-deep:#8F6616;    /* 밝은 배경 위 금색 글자. 흰·크림 배경에서 4.5:1 이상이 되도록 진하게 잡았다 */
+  --on-gold:#1F3B2E;      /* 금색 버튼 위 글자. --ink를 쓰면 다크 모드에서 밝은 글자가 금색 위에 올라가 안 보인다 */
+  --green-tint:#EAF2ED;
+  --surface-dark:#1F3B2E; /* 푸터·인트로처럼 "항상 어두운" 면. --ink와 달리 다크 모드에서도 어둡다 */
+  --on-dark:#F7F5EF;
+  --edge-pad:clamp(24px, 5vw, 96px);
+  --ok-fg:#1b5e3b;
+  --err-fg:#b3261e;
+  --err-bg:#fdecea;
+  --now:#c4262c;
+  --now-fill:#c4262c;
+}
+
+/* ---- 다크 모드 ----
+   색을 변수 하나로만 쓰고 있어서(--ink, --cream ...) 변수 값만 바꾸면 사이트 전체가 바뀐다.
+   --ink(글자)와 --cream(배경)이 서로 뒤집히므로 "ink 배경 + cream 글자" 버튼도 자연스럽게 밝은 버튼이 된다. */
+html[data-theme="dark"]{
+  --ink:#E9F0EB;
+  --ink-soft:#A3B7AB;
+  --cream:#101A15;
+  --card:#18241E;
+  --line:#2B3B32;
+  --gold:#E0AE55;
+  --gold-deep:#E3B766;
+  --on-gold:#14210F;
+  --green-tint:#1E3027;
+  --surface-dark:#0A110D;
+  --on-dark:#F2F0E8;
+  --ok-fg:#7fd6a4;
+  --err-fg:#ff9a94;
+  --err-bg:#3a1f1d;
+  --now:#ff8085;
+  --now-fill:#c4262c;
+  color-scheme:dark;
+}
+
+/* ---- 고대비 모드 ----  글자와 배경의 명암 차이를 최대로, 테두리를 또렷하게 한다. */
+html[data-contrast="high"]{
+  --ink:#000000;
+  --ink-soft:#1f1f1f;
+  --cream:#ffffff;
+  --card:#ffffff;
+  --line:#000000;
+  --gold:#FFD23F;
+  --gold-deep:#6B4A00;
+  --on-gold:#000000;
+  --green-tint:#f0f0f0;
+  --surface-dark:#000000;
+  --on-dark:#ffffff;
+  --ok-fg:#00531f;
+  --err-fg:#8a0000;
+  --err-bg:#ffffff;
+}
+html[data-theme="dark"][data-contrast="high"]{
+  --ink:#ffffff;
+  --ink-soft:#ececec;
+  --cream:#000000;
+  --card:#000000;
+  --line:#ffffff;
+  --gold:#FFD23F;
+  --gold-deep:#FFD23F;
+  --on-gold:#000000;
+  --green-tint:#121212;
+  --surface-dark:#000000;
+  --on-dark:#ffffff;
+  --ok-fg:#7dffb0;
+  --err-fg:#ff8a8a;
+  --err-bg:#000000;
+}
+html[data-contrast="high"] a{ text-decoration:underline; }
+html[data-contrast="high"] *{ text-shadow:none !important; }
+
+/* ---- 큰 글씨 ----
+   이 사이트의 글자 크기는 대부분 px로 적혀 있어서 html 글자 크기만 키우면 반응하지 않는다.
+   그래서 화면 전체를 확대하는 zoom을 쓴다. (글자와 버튼·여백이 함께 커져서 레이아웃이 어긋나지 않는다) */
+html[data-text="large"]{ zoom:1.2; }
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+body{
+  font-family:var(--font-sans);
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.55;
+  transition:background-color .2s ease, color .2s ease;
+}
+
+h1,h2,h3{ font-family:var(--font-display); font-weight:700; letter-spacing:-0.02em; }
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; color:inherit; cursor:pointer; border:none; background:none; }
+button:disabled{ opacity:.45; cursor:not-allowed; }
+
+/* 키보드로 이동할 때 현재 위치가 보이게 한다. (마우스 클릭에는 나타나지 않는다) */
+:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; border-radius:4px; }
+
+.wrap{ max-width:1160px; margin:0 auto; padding:0 32px; }
+
+/* "닫기" 글자와 아이콘을 한 줄에 나란히 놓는다. (CloseLabel) */
+.closeLabel{ display:inline-flex; align-items:center; gap:6px; }

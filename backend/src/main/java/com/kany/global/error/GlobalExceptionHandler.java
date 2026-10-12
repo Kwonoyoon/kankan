@@ -3,6 +3,8 @@ package com.kany.global.error;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,7 +23,9 @@ public class GlobalExceptionHandler {
 		return error(e.getErrorCode());
 	}
 
-	@ExceptionHandler({ MethodArgumentTypeMismatchException.class, MissingServletRequestParameterException.class })
+	// @Valid 검증 실패(이메일 형식, 비밀번호 길이 등)와 JSON 형식이 깨진 요청 본문
+	@ExceptionHandler({ MethodArgumentTypeMismatchException.class, MissingServletRequestParameterException.class,
+			MethodArgumentNotValidException.class, HttpMessageNotReadableException.class })
 	public ResponseEntity<ErrorResponse> handleBadRequest(Exception e) {
 		return error(ErrorCode.INVALID_INPUT);
 	}

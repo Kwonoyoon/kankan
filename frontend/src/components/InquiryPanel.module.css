@@ -1,0 +1,43 @@
+/* 주의: 서랍(Drawer.module.css)의 '.panel li button', '.panel ul' 규칙이 패널 안 모든 목록·버튼에 걸린다.
+   그래서 이 화면은 ul/li를 쓰지 않고 div/article로 만든다. */
+.heading{ font-family: var(--font-display); font-size: 16px; margin: 4px 0 12px; }
+.heading:not(:first-child){ margin-top: 28px; }
+
+.guest{ display: flex; flex-direction: column; gap: 14px; align-items: flex-start; font-size: 14.5px; color: var(--ink-soft); }
+
+.form{ display: flex; flex-direction: column; gap: 14px; }
+.form label{ display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink-soft); }
+.form input, .form select, .form textarea{
+  font: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  resize: vertical;
+}
+.row{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.primary{ align-self: flex-start; padding: 12px 24px; border-radius: 30px; background: var(--gold); color: var(--on-gold); font-size: 14px; font-weight: 600; }
+.primary:hover:not(:disabled){ background: #f0b854; }
+.error{ font-size: 13.5px; color: var(--err-fg); background: var(--err-bg); border-radius: 8px; padding: 10px 12px; }
+.ok{ font-size: 13.5px; color: var(--ok-fg); background: var(--green-tint); border-radius: 8px; padding: 10px 12px; }
+
+.empty{ color: var(--ink-soft); font-size: 14px; }
+.cards{ display: flex; flex-direction: column; gap: 12px; }
+.card{ border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 16px; }
+.cardHead{ display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.badge{ font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: var(--line); color: var(--ink-soft); }
+.badge.answered{ background: var(--ink); color: var(--cream); }
+.meta{ font-size: 12px; color: var(--ink-soft); }
+.title{ font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.content{ font-size: 13.5px; color: var(--ink-soft); white-space: pre-wrap; overflow-wrap: anywhere; }
+.answer{ margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: var(--green-tint); }
+.answerHead{ font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.answer p{ font-size: 13.5px; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+@media (max-width: 560px){
+  .row{ grid-template-columns: 1fr; }
+}

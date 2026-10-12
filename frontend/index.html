@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kany</title>
+    <script>
+      // 저장된 접근성 설정(다크 모드 등)을 화면이 그려지기 전에 적용한다.
+      // React가 뜬 뒤에 적용하면 밝은 화면이 먼저 번쩍인 뒤 어두워지는 깜빡임이 생긴다.
+      (function () {
+        try {
+          var s = JSON.parse(localStorage.getItem('kany.a11y'));
+          var r = document.documentElement;
+          if (s && s.dark === true) r.setAttribute('data-theme', 'dark');
+          if (s && s.contrast === true) r.setAttribute('data-contrast', 'high');
+          if (s && s.large === true) r.setAttribute('data-text', 'large');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

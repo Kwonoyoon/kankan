@@ -62,6 +62,28 @@ public class Space {
 	protected Space() {
 	}
 
+	public static Space create(Branch branch, String name, String description, int capacity, int price, String images,
+			Set<ConceptTag> tags, Set<Amenity> amenities) {
+		Space s = new Space();
+		s.id = "sp-" + java.util.UUID.randomUUID().toString().substring(0, 8);
+		s.branch = branch;
+		s.name = name;
+		s.description = description;
+		s.capacity = capacity;
+		s.price = price;
+		s.images = images;
+		s.active = true;
+		s.tags = tags;
+		s.amenities = amenities;
+		return s;
+	}
+
+	/** 관리자가 바꿀 수 있는 값만 열어 둔다. 이름·정원 같은 나머지는 이후 단계에서 필요해지면 추가한다. */
+	public void update(int price, boolean active) {
+		this.price = price;
+		this.active = active;
+	}
+
 	public String getId() {
 		return id;
 	}

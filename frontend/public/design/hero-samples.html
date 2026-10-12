@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>kany 히어로 디자인 샘플</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Song+Myung&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#1F3B2E; --ink-soft:#5b6b62; --cream:#F7F5EF; --card:#fff; --line:#E4E0D4;
+    --gold:#D9A441; --gold-deep:#B9862E; --tint:#EAF2ED; --red:#e5484d;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:'Inter','Malgun Gothic',sans-serif; background:#d9d6cc; color:var(--ink); line-height:1.5; }
+  h1,h2,h3{ font-family:'Fraunces',serif; letter-spacing:-0.01em; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+  img{ display:block; max-width:100%; }
+
+  /* ---- 샘플 안내 바 ---- */
+  .bar{ position:sticky; top:0; z-index:50; background:#101a15; color:#fff; display:flex; gap:10px; align-items:center; padding:12px 24px; flex-wrap:wrap; }
+  .bar b{ margin-right:8px; }
+  .bar a{ color:#fff; text-decoration:none; font-size:14px; padding:6px 14px; border-radius:20px; border:1px solid rgba(255,255,255,.35); }
+  .bar a:hover{ background:var(--gold); color:var(--ink); border-color:var(--gold); }
+  .label{ max-width:1240px; margin:44px auto 12px; padding:0 20px; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; }
+  .label h2{ font-size:22px; }
+  .label p{ color:#4b5a52; font-size:14px; }
+  .frame{ max-width:1240px; margin:0 auto 20px; background:var(--cream); border-radius:18px; overflow:hidden; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+
+  /* ---- 공통 헤더 ---- */
+  .top{ display:flex; align-items:center; justify-content:space-between; padding:22px 40px; }
+  .logo{ font-family:'Fraunces',serif; font-weight:700; font-size:24px; }
+  .top nav{ display:flex; align-items:center; gap:22px; font-size:14px; font-weight:600; }
+  .pill{ background:var(--ink); color:var(--cream); padding:11px 20px; border-radius:30px; font-size:14px; font-weight:600; }
+  .pill.gold{ background:var(--gold); color:var(--ink); }
+  .btn{ padding:14px 26px; border-radius:30px; font-weight:600; font-size:15px; }
+  .btn.primary{ background:var(--gold); color:var(--ink); }
+  .btn.primary:hover{ background:#f0b854; }
+  .btn.ghost{ border:1.5px solid var(--ink); }
+  .btn.ghost:hover{ background:var(--ink); color:var(--cream); }
+  .eyebrow{ font-size:13px; font-weight:700; color:var(--gold-deep); letter-spacing:.06em; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .dot{ width:8px; height:8px; border-radius:50%; background:var(--red); box-shadow:0 0 0 0 rgba(229,72,77,.6); animation:ping 1.8s infinite; display:inline-block; }
+  @keyframes ping{ 70%{ box-shadow:0 0 0 9px rgba(229,72,77,0); } 100%{ box-shadow:0 0 0 0 rgba(229,72,77,0); } }
+
+  /* =========================================================
+     A. 검색형 — "사진 대신 예약 위젯이 주인공"
+     ========================================================= */
+  .a .body{ display:grid; grid-template-columns:1.05fr 1fr; gap:40px; padding:24px 40px 56px; align-items:center; }
+  .a h1{ font-size:56px; line-height:1.08; margin-bottom:16px; }
+  .a h1 em{ font-style:normal; font-family:'Song Myung',serif; color:var(--gold-deep); font-size:.82em; display:block; margin-top:6px; }
+  .a .lead{ color:var(--ink-soft); font-size:16px; margin-bottom:28px; max-width:470px; }
+  .widget{ background:#fff; border:1px solid var(--line); border-radius:22px; padding:22px; box-shadow:0 14px 40px rgba(31,59,46,.10); }
+  .widget .row{ display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:12px; }
+  .widget label{ display:flex; flex-direction:column; gap:6px; font-size:12px; font-weight:700; color:var(--ink-soft); }
+  .widget input,.widget select{ font:inherit; font-size:15px; color:var(--ink); padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--cream); }
+  .widget .row2{ display:flex; gap:12px; align-items:flex-end; margin-top:12px; }
+  .widget .row2 label{ flex:1; }
+  .widget .go{ background:var(--ink); color:var(--cream); padding:13px 26px; border-radius:12px; font-weight:700; font-size:15px; white-space:nowrap; }
+  .widget .go:hover{ background:var(--gold-deep); }
+  .chips{ display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; }
+  .chip{ font-size:13px; font-weight:600; padding:7px 13px; border-radius:20px; border:1px solid var(--line); background:var(--cream); }
+  .chip.now{ border-color:var(--red); color:var(--red); background:#fff; font-weight:800; }
+  .collage{ position:relative; height:470px; }
+  .collage .p{ position:absolute; object-fit:cover; box-shadow:0 14px 34px rgba(0,0,0,.18); }
+  .collage .p1{ left:0; top:30px; width:48%; height:300px; border-radius:200px 200px 18px 18px; }
+  .collage .p2{ right:0; top:0; width:48%; height:210px; border-radius:18px 18px 18px 90px; }
+  .collage .p3{ right:6%; bottom:0; width:56%; height:230px; border-radius:18px 90px 18px 18px; }
+  .collage .tag{ position:absolute; left:6%; bottom:36px; background:var(--ink); color:#fff; padding:12px 16px; border-radius:14px; font-size:13px; line-height:1.4; box-shadow:0 10px 26px rgba(0,0,0,.25); }
+  .collage .tag b{ display:block; font-size:22px; font-family:'Fraunces',serif; color:var(--gold); }
+
+  /* =========================================================
+     B. 에디토리얼 — 큰 타이포 + 사진 모자이크 + 흐르는 띠
+     ========================================================= */
+  .b .body{ display:grid; grid-template-columns:1.1fr .9fr; min-height:520px; }
+  .b .left{ padding:36px 40px 40px 40px; display:flex; flex-direction:column; justify-content:center; }
+  .b h1{ font-size:92px; line-height:.95; font-weight:600; margin-bottom:22px; }
+  .b h1 span{ display:block; font-style:italic; color:var(--gold-deep); font-weight:500; }
+  .b .lead{ color:var(--ink-soft); font-size:16px; margin-bottom:26px; max-width:430px; }
+  .b .stats{ display:flex; gap:34px; margin-top:34px; padding-top:22px; border-top:1px solid var(--line); }
+  .b .stats div b{ display:block; font-family:'Fraunces',serif; font-size:30px; }
+  .b .stats div span{ font-size:12.5px; color:var(--ink-soft); }
+  .mosaic{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1.2fr 1fr; gap:10px; padding:14px 14px 14px 0; }
+  .tile{ position:relative; border-radius:16px; overflow:hidden; }
+  .tile img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .tile:hover img{ transform:scale(1.06); }
+  .tile .cap{ position:absolute; left:10px; bottom:10px; background:rgba(255,255,255,.92); color:var(--ink); font-size:12.5px; font-weight:700; padding:6px 11px; border-radius:20px; }
+  .tile.tall{ grid-row:span 2; }
+  .ticker{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden; background:var(--ink); color:var(--cream); }
+  .ticker .track{ display:flex; gap:44px; width:max-content; padding:15px 0; animation:slide 28s linear infinite; font-family:'Fraunces',serif; font-size:20px; }
+  .ticker .track span::after{ content:"✦"; color:var(--gold); margin-left:44px; }
+  @keyframes slide{ to{ transform:translateX(-50%); } }
+
+  /* =========================================================
+     C. 타임라인 — 시간 단위 예약을 그대로 보여주는 비주얼
+     ========================================================= */
+  .c{ background:#14281f; color:#fff; }
+  .c .top .pill{ background:var(--gold); color:var(--ink); }
+  .c .body{ padding:10px 40px 44px; }
+  .c .head{ display:flex; justify-content:space-between; align-items:flex-end; gap:30px; flex-wrap:wrap; margin-bottom:26px; }
+  .c h1{ font-size:50px; line-height:1.05; max-width:560px; }
+  .c h1 em{ font-style:normal; color:var(--gold); }
+  .c .sub{ color:#b8cbbf; font-size:15px; max-width:340px; }
+  .tl{ background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:20px 20px 16px; overflow-x:auto; }
+  .tl-grid{ position:relative; min-width:880px; display:grid; grid-template-columns:150px repeat(17,1fr); gap:5px; align-items:center; }
+  .tl .h{ font-size:11px; color:#9fb5a8; text-align:center; }
+  .tl .name{ font-size:13.5px; font-weight:600; padding-right:8px; }
+  .tl .name small{ display:block; font-weight:400; color:#9fb5a8; font-size:11px; }
+  .cell{ height:28px; border-radius:6px; }
+  .cell.open{ background:rgba(217,164,65,.22); border:1px solid rgba(217,164,65,.55); cursor:pointer; transition:.15s; }
+  .cell.open:hover{ background:var(--gold); }
+  .cell.taken{ background:rgba(255,255,255,.1); }
+  .cell.block{ background:repeating-linear-gradient(45deg,rgba(255,255,255,.1) 0 4px,transparent 4px 8px); }
+  .nowline{ position:absolute; top:-6px; bottom:-6px; width:2px; background:var(--red); box-shadow:0 0 12px var(--red); z-index:2; }
+  .nowline::before{ content:"NOW"; position:absolute; top:-18px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:800; background:var(--red); padding:2px 6px; border-radius:10px; }
+  .legend{ display:flex; gap:18px; margin-top:16px; font-size:12.5px; color:#b8cbbf; flex-wrap:wrap; align-items:center; }
+  .legend i{ display:inline-block; width:14px; height:14px; border-radius:4px; vertical-align:-2px; margin-right:6px; }
+  .c .cta{ display:flex; gap:12px; margin-left:auto; }
+
+  /* =========================================================
+     D. 벤토 — 컨셉 타일로 바로 진입
+     ========================================================= */
+  .d .body{ padding:6px 40px 44px; }
+  .d .head{ display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:22px; flex-wrap:wrap; }
+  .d h1{ font-size:48px; line-height:1.05; }
+  .d h1 span{ color:var(--gold-deep); }
+  .bento{ display:grid; grid-template-columns:repeat(12,1fr); grid-auto-rows:118px; gap:12px; }
+  .bt{ position:relative; border-radius:20px; overflow:hidden; background:#222; color:#fff; cursor:pointer; }
+  .bt img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+  .bt:hover img{ transform:scale(1.05); }
+  .bt::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.62)); }
+  .bt .t{ position:absolute; left:16px; bottom:14px; z-index:1; }
+  .bt .t b{ display:block; font-family:'Fraunces',serif; font-size:21px; }
+  .bt .t span{ font-size:12.5px; opacity:.9; }
+  .bt .n{ position:absolute; top:12px; right:12px; z-index:1; background:#fff; color:var(--ink); font-size:12px; font-weight:800; padding:4px 10px; border-radius:20px; }
+  /* 12칸 × 3줄을 빈틈없이 채운다: 왼쪽 큰 타일 1개 + 오른쪽 위 2개 + 오른쪽 아래 3개 */
+  .bt.big{ grid-column:1 / 6; grid-row:1 / 4; }
+  .bt.p2{ grid-column:6 / 10; grid-row:1 / 3; }
+  .bt.p3{ grid-column:10 / 13; grid-row:1 / 3; }
+  .bt.p4{ grid-column:6 / 8; grid-row:3 / 4; }
+  .bt.p5{ grid-column:8 / 10; grid-row:3 / 4; }
+  .bt.p6{ grid-column:10 / 13; grid-row:3 / 4; }
+  .bt.p4 .t b,.bt.p5 .t b{ font-size:17px; }
+  .bt.p4 .t span,.bt.p5 .t span{ display:none; }
+  .bt.cta{ background:var(--gold); color:var(--ink); display:flex; flex-direction:column; justify-content:center; padding:18px; }
+  .bt.cta::after{ display:none; }
+  .bt.cta b{ font-family:'Fraunces',serif; font-size:24px; line-height:1.15; }
+  .bt.cta span{ font-size:13px; margin-top:6px; }
+  .bt.stat{ background:var(--ink); display:flex; flex-direction:column; justify-content:center; padding:18px; }
+  .bt.stat::after{ display:none; }
+  .bt.stat b{ font-family:'Fraunces',serif; font-size:34px; color:var(--gold); }
+  .bt.stat span{ font-size:13px; color:#cfe0d5; }
+
+  .note{ max-width:1240px; margin:36px auto 70px; padding:0 20px; color:#3b4a43; font-size:14px; }
+  @media (max-width:900px){
+    .a .body,.b .body{ grid-template-columns:1fr; }
+    .b h1{ font-size:60px; } .a h1{ font-size:40px; } .c h1,.d h1{ font-size:36px; }
+    .collage{ height:360px; } .widget .row{ grid-template-columns:1fr 1fr; }
+    /* 좁은 화면: 큰 타일은 한 줄 전체, 나머지는 2열로 빈틈없이 쌓는다. */
+    .bento{ grid-template-columns:repeat(2,1fr); grid-auto-rows:130px; }
+    .bt.big{ grid-column:1 / 3; grid-row:auto; }
+    .bt.p2,.bt.p3,.bt.p4,.bt.p5{ grid-column:auto; grid-row:auto; }
+    .bt.p4 .t span,.bt.p5 .t span{ display:block; }
+    .bt.p6{ grid-column:1 / 3; grid-row:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>kany 히어로 디자인 샘플</b>
+  <a href="#a">A 검색형</a><a href="#b">B 에디토리얼</a><a href="#c">C 타임라인</a><a href="#d">D 벤토</a>
+</div>
+
+<!-- ============ A ============ -->
+<div class="label" id="a"><h2>A · 검색형</h2><p>사진 대신 "예약 위젯"이 주인공. 들어오자마자 날짜·시간·인원으로 빈 공간을 찾아요.</p></div>
+<div class="frame a">
+  <div class="top"><div class="logo">kany</div><nav><span>로그인</span><span class="pill">지금 예약하기</span><span>메뉴 ☰</span></nav></div>
+  <div class="body">
+    <div>
+      <div class="eyebrow"><span class="dot"></span> 지금 바로 이용 가능 · <span id="aNow">18</span>곳</div>
+      <h1>오늘 필요한 시간만<em>비어 있는 공간을 찾아드려요</em></h1>
+      <p class="lead">홍대·강남·건대·성수·신촌, 합주실부터 스터디룸·녹음부스·파티룸까지. 1시간 단위로 바로 예약하세요.</p>
+      <div class="widget">
+        <div class="row">
+          <label>날짜<input type="date" id="aDate" /></label>
+          <label>시간<select><option>17:00</option><option>18:00</option><option>19:00</option></select></label>
+          <label>인원<select><option>1~2명</option><option selected>3~4명</option><option>5~8명</option><option>9명 이상</option></select></label>
+        </div>
+        <div class="row2">
+          <label>용도<select><option>전체</option><option>밴드 합주</option><option>스터디</option><option>촬영</option><option>녹음·팟캐스트</option><option>파티룸</option></select></label>
+          <button class="go">빈 공간 찾기 →</button>
+        </div>
+        <div class="chips"><span class="chip now">NOW 지금 바로</span><span class="chip">1만원 이하</span><span class="chip">방음</span><span class="chip">빔프로젝터</span><span class="chip">주차</span></div>
+      </div>
+    </div>
+    <div class="collage">
+      <img class="p p1" src="/rooms/band-practice.jpg" alt="" />
+      <img class="p p2" src="/rooms/studyroom.jpg" alt="" />
+      <img class="p p3" src="/rooms/shoot-studio.jpg" alt="" />
+      <div class="tag">시간당<b>5,000원~</b>23개 공간</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ B ============ -->
+<div class="label" id="b"><h2>B · 에디토리얼</h2><p>잡지 표지 같은 큰 글자 + 사진 모자이크 + 흐르는 컨셉 띠. 사진 위에 글자를 얹지 않아요.</p></div>
+<div class="frame b">
+  <div class="top"><div class="logo">kany</div><nav><span>공간</span><span>정기권</span><span>이벤트</span><span class="pill">지금 예약하기</span></nav></div>
+  <div class="body">
+    <div class="left">
+      <div class="eyebrow"><span class="dot"></span> 매일 07:00 – 24:00 · 1시간 단위</div>
+      <h1>오늘<span>필요한</span>시간만.</h1>
+      <p class="lead">연습하고, 모이고, 찍고, 녹음하는 모든 순간을 위한 시간제 공간.</p>
+      <div style="display:flex;gap:12px"><button class="btn primary">지금 예약하기</button><button class="btn ghost">공간 둘러보기</button></div>
+      <div class="stats"><div><b>23</b><span>공간</span></div><div><b>5</b><span>지점</span></div><div><b>10</b><span>용도</span></div></div>
+    </div>
+    <div class="mosaic">
+      <div class="tile tall"><img src="/rooms/band-practice.jpg" alt="" /><span class="cap">합주실 · 12,000원~</span></div>
+      <div class="tile"><img src="/rooms/party-1.svg" alt="" /><span class="cap">파티룸 · 30,000원~</span></div>
+      <div class="tile"><img src="/rooms/studyroom.jpg" alt="" /><span class="cap">스터디룸 · 5,000원~</span></div>
+    </div>
+  </div>
+  <div class="ticker"><div class="track">
+    <span>밴드 합주</span><span>보컬 연습</span><span>댄스 연습</span><span>소규모 스터디</span><span>촬영 스튜디오</span><span>녹음·팟캐스트</span><span>파티룸</span><span>회의실</span><span>클래스·워크숍</span><span>세미나실</span>
+    <span>밴드 합주</span><span>보컬 연습</span><span>댄스 연습</span><span>소규모 스터디</span><span>촬영 스튜디오</span><span>녹음·팟캐스트</span><span>파티룸</span><span>회의실</span><span>클래스·워크숍</span><span>세미나실</span>
+  </div></div>
+</div>
+
+<!-- ============ C ============ -->
+<div class="label" id="c"><h2>C · 타임라인</h2><p>"1시간 단위 예약"을 그대로 그림으로. 비어 있는 칸을 눌러 바로 예약하는 kany만의 첫 화면이에요.</p></div>
+<div class="frame c">
+  <div class="top"><div class="logo">kany</div><nav><span>로그인</span><span class="pill">지금 예약하기</span><span>메뉴 ☰</span></nav></div>
+  <div class="body">
+    <div class="head">
+      <h1>오늘, <em>비어 있는 시간</em>이 한눈에.</h1>
+      <p class="sub">금색 칸이 지금 예약할 수 있는 시간이에요. 눌러서 바로 예약하세요.</p>
+    </div>
+    <div class="tl">
+      <div class="tl-grid" id="tl"></div>
+      <div class="legend"><span><i style="background:rgba(217,164,65,.4);border:1px solid #d9a441"></i>예약 가능</span><span><i style="background:rgba(255,255,255,.18)"></i>예약됨</span><span><i style="background:repeating-linear-gradient(45deg,rgba(255,255,255,.25) 0 3px,transparent 3px 6px)"></i>점검·휴무</span>
+        <span class="cta"><button class="btn primary">지금 예약하기</button><button class="btn" style="border:1.5px solid rgba(255,255,255,.5)">전체 공간 보기</button></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ D ============ -->
+<div class="label" id="d"><h2>D · 벤토</h2><p>용도별 타일을 바로 눌러 들어가요. 처음 온 사람이 "여기서 뭘 빌릴 수 있지?"를 한눈에 알아요.</p></div>
+<div class="frame d">
+  <div class="top"><div class="logo">kany</div><nav><span>로그인</span><span class="pill">지금 예약하기</span><span>메뉴 ☰</span></nav></div>
+  <div class="body">
+    <div class="head">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> NOW · 지금 바로 이용 가능 18곳</div>
+        <h1>무엇을 하실 건가요?<br /><span>kany에서 빌려 쓰세요.</span></h1>
+      </div>
+      <div style="display:flex;gap:12px"><button class="btn primary">지금 예약하기</button><button class="btn ghost">정기권 보기</button></div>
+    </div>
+    <div class="bento">
+      <div class="bt big"><img src="/rooms/band-practice.jpg" alt="" /><span class="n">6곳</span><div class="t"><b>밴드 합주</b><span>드럼·앰프 완비 · 12,000원~</span></div></div>
+      <div class="bt p2"><img src="/rooms/studyroom.jpg" alt="" /><span class="n">5곳</span><div class="t"><b>스터디</b><span>5,000원~</span></div></div>
+      <div class="bt p3"><img src="/rooms/shoot-studio.jpg" alt="" /><span class="n">3곳</span><div class="t"><b>촬영</b><span>13,000원~</span></div></div>
+      <div class="bt p4"><img src="/rooms/record-1.svg" alt="" /><span class="n">2곳</span><div class="t"><b>녹음</b></div></div>
+      <div class="bt p5"><img src="/rooms/party-2.svg" alt="" /><span class="n">2곳</span><div class="t"><b>파티룸</b></div></div>
+      <div class="bt p6 cta"><b>전체 23곳 보기 →</b><span>필터로 골라서 예약</span></div>
+    </div>
+  </div>
+</div>
+
+<p class="note">샘플의 사진 중 .jpg는 실제 kany 사진, .svg는 임시 일러스트예요. 글자·숫자는 모양을 보여주기 위한 예시입니다.</p>
+
+<script>
+  // A: 오늘 날짜를 기본값으로
+  const d = new Date(); const pad = (n)=>String(n).padStart(2,'0');
+  document.getElementById('aDate').value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+
+  // C: 타임라인 만들기 (예시 데이터. 실제로는 /api/reservations/booked 를 쓰면 된다)
+  const rows = [
+    ['2번 합주실','홍대점'],['스터디룸 A','강남점'],['촬영 스튜디오 화이트','건대점'],['팟캐스트 부스','홍대점'],['파티룸 블룸','성수점'],['회의실 프라임','강남점']
+  ];
+  const taken = [[9,10,11],[13,14],[7,8,9,16,17],[10,11,12,19],[15,16,17,18],[8,9,13]];
+  const blocked = [[],[21],[],[],[],[22,23]];
+  const grid = document.getElementById('tl');
+  const nowHour = Math.min(23, Math.max(7, new Date().getHours()+1));
+  let html = '<div></div>';
+  for (let h=7; h<24; h++) html += `<div class="h">${pad(h)}</div>`;
+  rows.forEach((r,i)=>{
+    html += `<div class="name">${r[0]}<small>${r[1]}</small></div>`;
+    for (let h=7; h<24; h++){
+      const cls = blocked[i].includes(h) ? 'block' : taken[i].includes(h) || h < nowHour ? 'taken' : 'open';
+      html += `<div class="cell ${cls}" title="${r[0]} ${pad(h)}:00"></div>`;
+    }
+  });
+  grid.innerHTML = html + `<div class="nowline" style="left:calc(150px + 5px + (100% - 150px - 5px) * ${(nowHour-7)/17})"></div>`;
+</script>
+</body>
+</html>
