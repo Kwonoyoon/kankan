@@ -1,37 +1,61 @@
 import { useState } from 'react';
 import { branchName } from '../data/mockData';
-import { getTimeSlots } from '../lib/reservations';
+import { getTimeSlots, todayISODate, isPastSlot, isSlotAvailable } from '../lib/reservations';
+import { applyDiscount } from '../lib/coupons';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useApp } from '../AppContext';
 import styles from './BookingModal.module.css';
 
 const timeSlots = getTimeSlots();
-
-function todayISODate() {
-  return new Date().toISOString().slice(0, 10);
-}
 
 function formatDate(isoDate, lang) {
   const date = new Date(`${isoDate}T00:00:00`);
   return date.toLocaleDateString(lang === 'en' ? 'en-US' : 'ko-KR', { month: 'long', day: 'numeric', weekday: 'short' });
 }
 
-function BookingModal({ space, onClose, onConfirm }) {
+function formatWon(amount, lang) {
+  return lang === 'en' ? `₩${amount.toLocaleString()}` : `${amount.toLocaleString()}원`;
+}
+
+function BookingModal({ space, onClose, initialDate, initialTime }) {
   const { t, lang } = useLanguage();
-  const [date, setDate] = useState(todayISODate);
-  const [time, setTime] = useState(timeSlots[0]);
+  const { reservations, availableCoupons, confirmBooking } = useApp();
+  const [date, setDate] = useState(initialDate || todayISODate);
+  const [chosenTime, setChosenTime] = useState(initialTime || '');
+  const [couponId, setCouponId] = useState('');
   const [done, setDone] = useState(false);
+
+  const slots = timeSlots.map((slot) => ({ slot, ok: isSlotAvailable(reservations, space.id, date, slot) }));
+
+  // 날짜를 바꾸면 고르던 시간이 그날 이미 찼을 수 있다. 그럴 땐 첫 빈 시간으로 대신 잡는다.
+  const firstFree = slots.find((s) => s.ok)?.slot ?? '';
+  const time = slots.find((s) => s.slot === chosenTime)?.ok ? chosenTime : firstFree;
+
+  const coupon = availableCoupons.find((c) => c.id === couponId);
+  const finalPrice = coupon ? applyDiscount(space.pricePerHour, coupon.discountRate) : space.pricePerHour;
+
+  function slotLabel({ slot, ok }) {
+    if (ok) return slot;
+    return `${slot} ${isPastSlot(date, slot) ? t('(지난 시간)') : t('(예약됨)')}`;
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    onConfirm({
-      id: `res-${Date.now()}`,
-      spaceId: space.id,
-      spaceName: space.name,
-      branchName: branchName(space.branchId),
-      pricePerHour: space.pricePerHour,
-      date,
-      time,
-    });
+    if (!time) return;
+    confirmBooking(
+      {
+        id: `res-${Date.now()}`,
+        spaceId: space.id,
+        spaceName: space.name,
+        branchName: branchName(space.branchId),
+        pricePerHour: space.pricePerHour,
+        price: finalPrice,
+        couponCode: coupon ? coupon.code : null,
+        date,
+        time,
+      },
+      coupon ? coupon.id : null,
+    );
     setDone(true);
   }
 
@@ -45,6 +69,7 @@ function BookingModal({ space, onClose, onConfirm }) {
             <h3>{t('예약이 완료됐어요')}</h3>
             <p>{t(branchName(space.branchId))} · {t(space.name)}</p>
             <p>{formatDate(date, lang)} {time}</p>
+            <p>{t('결제 금액')} {formatWon(finalPrice, lang)}</p>
             <button className={styles.confirmBtn} onClick={onClose}>{t('확인')}</button>
           </div>
         ) : (
@@ -67,14 +92,30 @@ function BookingModal({ space, onClose, onConfirm }) {
 
             <label className={styles.field}>
               {t('시간')}
-              <select value={time} onChange={(e) => setTime(e.target.value)}>
-                {timeSlots.map((slot) => (
-                  <option key={slot} value={slot}>{slot}</option>
+              <select value={time} onChange={(e) => setChosenTime(e.target.value)} disabled={!firstFree}>
+                {slots.map((s) => (
+                  <option key={s.slot} value={s.slot} disabled={!s.ok}>{slotLabel(s)}</option>
+                ))}
+              </select>
+              {!firstFree && <span className={styles.warn}>{t('이 날짜에는 예약 가능한 시간이 없어요.')}</span>}
+            </label>
+
+            <label className={styles.field}>
+              {t('쿠폰')}
+              <select value={couponId} onChange={(e) => setCouponId(e.target.value)}>
+                <option value="">{t('사용 안 함')}</option>
+                {availableCoupons.map((c) => (
+                  <option key={c.id} value={c.id}>{t(c.title)} ({c.code})</option>
                 ))}
               </select>
             </label>
 
-            <button type="submit" className={styles.confirmBtn}>{t('예약 확정')}</button>
+            <div className={styles.total}>
+              <span>{t('결제 금액')}</span>
+              <strong>{formatWon(finalPrice, lang)}</strong>
+            </div>
+
+            <button type="submit" className={styles.confirmBtn} disabled={!firstFree}>{t('예약 확정')}</button>
           </form>
         )}
       </div>

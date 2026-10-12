@@ -3,6 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import ReservationList from './ReservationList';
 import PlaceholderLink from './PlaceholderLink';
 import Branches from './Branches';
+import EventsPanel from './EventsPanel';
 import styles from './Drawer.module.css';
 
 function DrawerLink({ href, children, onTabChange, onOpenPassPlans, onClose }) {
@@ -80,7 +81,9 @@ function Drawer({
             </>
           )}
 
-          {active && activeId !== 'mypage' && (
+          {activeId === 'events' && <EventsPanel />}
+
+          {active && activeId !== 'mypage' && activeId !== 'events' && (
             <>
               {active.image && <img src={active.image} alt={t(active.label)} />}
               <ul>

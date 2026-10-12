@@ -1,9 +1,13 @@
 import { branchName } from '../data/mockData';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useApp } from '../AppContext';
+import StarRating from './StarRating';
 import styles from './SpaceCard.module.css';
 
 function SpaceCard({ space, onReserve }) {
   const { t, lang } = useLanguage();
+  const { ratingFor, openReviews } = useApp();
+  const { avg, count } = ratingFor(space.id);
 
   return (
     <div className={styles.card}>
@@ -18,6 +22,10 @@ function SpaceCard({ space, onReserve }) {
       <div className={styles.body}>
         <div className={styles.branch}>{t(branchName(space.branchId))}</div>
         <h4>{t(space.name)}</h4>
+        <button className={styles.rating} onClick={() => openReviews(space)}>
+          <StarRating value={avg} />
+          <span>{count === 0 ? t('후기 없음') : `${avg.toFixed(1)} (${count})`}</span>
+        </button>
         <p className={styles.desc}>{t(space.description)}</p>
         <div className={styles.meta}>
           <span>{lang === 'en' ? `Fits ${space.capacity}` : `정원 ${space.capacity}명`}</span>

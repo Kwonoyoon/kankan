@@ -50,6 +50,19 @@
   background: var(--card);
 }
 
+.warn{ font-size: 12.5px; font-weight: 400; color: #b3261e; }
+.total{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 4px;
+  margin-top: 4px;
+  border-top: 1px dashed var(--line);
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.total strong{ font-family: 'Fraunces', serif; font-size: 20px; color: var(--ink); }
+
 .confirmBtn{
   width: 100%;
   margin-top: 8px;
@@ -61,6 +74,7 @@
   font-weight: 600;
 }
 .confirmBtn:hover{ background: #f0b854; }
+.confirmBtn:disabled:hover{ background: var(--gold); }
 
 .done{ text-align: center; padding-top: 12px; }
 .done h3{ margin-bottom: 12px; }

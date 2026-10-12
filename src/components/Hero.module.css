@@ -24,7 +24,10 @@
   z-index: 1;
   background: linear-gradient(180deg, rgba(15,26,20,0.25) 0%, rgba(15,26,20,0.55) 55%, rgba(15,26,20,0.88) 100%);
 }
-.content{ position: relative; z-index: 2; }
+/* .hero가 flex라서 width가 없으면 이 상자가 글 길이만큼만 줄어들고 margin:auto(.wrap)로 가운데에 붙는다.
+   또 .wrap은 1160px 컨테이너를 화면 가운데에 두기 때문에 넓은 화면(1920px)에선 글자가 왼쪽에서 400px쯤 떨어진다.
+   히어로는 사진이 화면 전체를 쓰므로 컨테이너가 아니라 화면 왼쪽 가장자리를 기준으로 맞춘다. */
+.hero .content{ position: relative; z-index: 2; width: 100%; max-width: none; margin: 0; padding: 0 var(--edge-pad); }
 .eyebrow{
   font-size: 14px;
   opacity: 0.9;

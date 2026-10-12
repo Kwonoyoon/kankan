@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { spaces, concepts } from '../data/mockData';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useApp } from '../AppContext';
 import BookingModal from './BookingModal';
 import SpaceCard from './SpaceCard';
 import styles from './SpaceGrid.module.css';
@@ -9,8 +10,9 @@ function conceptLabel(conceptId) {
   return concepts.find((c) => c.id === conceptId)?.label ?? '';
 }
 
-function SpaceGrid({ activeConcept, onReserve, onRequireAuth }) {
+function SpaceGrid({ activeConcept }) {
   const { t, lang } = useLanguage();
+  const { requireAuth } = useApp();
   const [bookingSpace, setBookingSpace] = useState(null);
 
   const filtered = activeConcept
@@ -36,18 +38,14 @@ function SpaceGrid({ activeConcept, onReserve, onRequireAuth }) {
         ) : (
           <div className={styles.grid}>
             {filtered.map((s) => (
-              <SpaceCard key={s.id} space={s} onReserve={() => onRequireAuth(() => setBookingSpace(s))} />
+              <SpaceCard key={s.id} space={s} onReserve={() => requireAuth(() => setBookingSpace(s))} />
             ))}
           </div>
         )}
       </div>
 
       {bookingSpace && (
-        <BookingModal
-          space={bookingSpace}
-          onClose={() => setBookingSpace(null)}
-          onConfirm={onReserve}
-        />
+        <BookingModal space={bookingSpace} onClose={() => setBookingSpace(null)} />
       )}
     </section>
   );

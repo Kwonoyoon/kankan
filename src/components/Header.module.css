@@ -12,7 +12,11 @@
   background: var(--cream);
   border-bottom-color: var(--line);
 }
-.inner{
+/* 히어로 글자와 같은 왼쪽 기준선을 쓴다. 안 맞추면 로고만 가운데 컨테이너 쪽에 남아 어긋나 보인다. */
+.topbar .inner{
+  max-width: none;
+  margin: 0;
+  padding: 0 var(--edge-pad);
   display: flex;
   align-items: center;
   justify-content: space-between;

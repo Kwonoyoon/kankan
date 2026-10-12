@@ -35,7 +35,41 @@
 }
 .closeBtn:hover{ color: var(--ink); }
 
-.subtitle{ color: var(--ink-soft); font-size: 15px; margin-bottom: 28px; }
+.filters{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 18px 0 16px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.filters label{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.filters input, .filters select{
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--cream);
+}
+.resetBtn{ font-size: 13px; font-weight: 600; color: var(--ink-soft); padding: 9px 4px; margin-left: auto; }
+.resetBtn:hover:not(:disabled){ color: var(--ink); }
+
+.subtitle{ color: var(--ink-soft); font-size: 15px; margin-bottom: 8px; }
+.note{ color: var(--ink-soft); font-size: 12.5px; margin-bottom: 20px; }
+.grid{ margin-top: 20px; }
 
 .grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 

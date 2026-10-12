@@ -137,6 +137,44 @@ export const notices = [
   { tag: '안내', title: '추석 연휴 운영시간 변경 안내', date: '2026.08.20' },
 ];
 
+export const coupons = [
+  { id: 'welcome20', code: 'WELCOME20', title: '첫 예약 20% 할인', discountRate: 20 },
+  { id: 'open10', code: 'OPEN10', title: '오픈 기념 10% 할인', discountRate: 10 },
+];
+
+export const events = [
+  {
+    id: 'ev-welcome',
+    title: '첫 예약 20% 할인',
+    desc: '처음 예약하는 분께 20% 할인 쿠폰을 드려요. 예약 1건에 사용할 수 있어요.',
+    period: '2026.10.01 ~ 2026.10.31',
+    couponId: 'welcome20',
+  },
+  {
+    id: 'ev-open',
+    title: '오픈 기념 10% 할인',
+    desc: '건대점 세미나실 201 오픈을 기념해 모든 이용자에게 10% 할인 쿠폰을 드려요.',
+    period: '2026.10.01 ~ 2026.10.31',
+    couponId: 'open10',
+  },
+];
+
+// 공간마다 처음부터 보이는 샘플 후기. 사용자가 쓴 후기는 localStorage에 따로 저장되고 이 목록과 합쳐서 보여준다.
+export const sampleReviews = [
+  { id: 'sr-1', spaceId: 'sp-1', nickname: '드러머민수', rating: 5, text: '방음이 잘 돼서 합주하기 좋아요. 앰프 상태도 좋았어요.', date: '2026-10-02' },
+  { id: 'sr-2', spaceId: 'sp-1', nickname: '기타치는지은', rating: 4, text: '드럼 세팅이 깔끔해요. 주말엔 예약이 빨리 차요.', date: '2026-09-21' },
+  { id: 'sr-3', spaceId: 'sp-2', nickname: '시험기간생', rating: 5, text: '콘센트가 많고 조용해서 집중이 잘 됐어요.', date: '2026-10-05' },
+  { id: 'sr-4', spaceId: 'sp-2', nickname: '스터디장', rating: 4, text: '화이트보드가 커서 팀 스터디에 딱이에요.', date: '2026-09-18' },
+  { id: 'sr-5', spaceId: 'sp-3', nickname: '촬영담당', rating: 5, text: '조명이 좋아서 제품 사진 찍기 편했어요.', date: '2026-10-08' },
+  { id: 'sr-6', spaceId: 'sp-3', nickname: '회의러', rating: 4, text: '화면공유가 바로 돼서 미팅이 수월했어요.', date: '2026-09-27' },
+  { id: 'sr-7', spaceId: 'sp-4', nickname: '보컬지망생', rating: 5, text: '피아노가 있어서 발성 연습하기 좋아요.', date: '2026-10-01' },
+  { id: 'sr-8', spaceId: 'sp-4', nickname: '노래하는하은', rating: 4, text: '방음부스 덕분에 마음 편히 불렀어요.', date: '2026-09-15' },
+  { id: 'sr-9', spaceId: 'sp-5', nickname: '댄서수아', rating: 5, text: '거울이 커서 동선 맞추기 좋았어요.', date: '2026-10-06' },
+  { id: 'sr-10', spaceId: 'sp-5', nickname: '크루리더', rating: 4, text: '마루바닥이 미끄럽지 않아서 안심이에요.', date: '2026-09-23' },
+  { id: 'sr-11', spaceId: 'sp-6', nickname: '스터디모임', rating: 5, text: '스크린이 선명해서 발표하기 좋았어요.', date: '2026-10-03' },
+  { id: 'sr-12', spaceId: 'sp-6', nickname: '정기모임장', rating: 4, text: '인원이 많아도 여유 있는 공간이에요.', date: '2026-09-19' },
+];
+
 // href가 '#'이면 아직 실제 페이지·폼이 없는 항목(PlaceholderLink로 렌더링).
 // href가 'tab:xxx'면 Drawer 안에서 다른 탭으로 전환, 'modal:xxx'면 별도 팝업(모달)을 연다.
 export const drawerSections = [
@@ -161,6 +199,10 @@ export const drawerSections = [
   {
     id: 'mypage',
     label: '내 예약',
+  },
+  {
+    id: 'events',
+    label: '쿠폰·이벤트',
   },
   {
     id: 'live',

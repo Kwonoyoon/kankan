@@ -9,6 +9,7 @@
   --gold:#D9A441;
   --gold-deep:#B9862E;
   --green-tint:#EAF2ED;
+  --edge-pad:clamp(24px, 5vw, 96px);
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
