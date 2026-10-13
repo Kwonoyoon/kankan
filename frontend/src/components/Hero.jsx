@@ -22,7 +22,7 @@ const QUICK_CHIPS = [
 
 function Hero({ onOpenPass, onSearch }) {
   const { t, lang } = useLanguage();
-  const { spaces, concepts, isNow } = useApp();
+  const { spaces, concepts } = useApp();
   const [form, setForm] = useState({ date: todayISODate(), time: '', people: '', concept: '' });
   const [slide, setSlide] = useState(0);
 
@@ -31,7 +31,6 @@ function Hero({ onOpenPass, onSearch }) {
     return () => clearInterval(id);
   }, []);
 
-  const nowCount = spaces.filter((s) => isNow(s.id)).length;
   const minPrice = spaces.length ? Math.min(...spaces.map((s) => s.pricePerHour)) : 0;
 
   function set(key, value) {
@@ -52,12 +51,6 @@ function Hero({ onOpenPass, onSearch }) {
 
       <div className={styles.inner}>
         <div className={styles.copy}>
-          {nowCount > 0 && (
-            <div className={styles.eyebrow}>
-              <span className={styles.dot} />
-              {lang === 'en' ? `${nowCount} spaces available now` : `지금 바로 이용 가능 · ${nowCount}곳`}
-            </div>
-          )}
           <h1>
             {t('오늘 필요한 시간만')}
             <em>{t('비어 있는 공간을 찾아드려요')}</em>

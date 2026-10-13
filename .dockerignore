@@ -8,3 +8,5 @@ backend
 .env
 .env.*
 !.env.example
+# 원본 이미지 모음. 사이트에 쓰는 건 frontend/public/rooms 로 옮겨 둔 것이라 이미지에 넣을 필요 없다.
+이미지

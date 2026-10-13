@@ -38,32 +38,6 @@
   padding: 0 var(--edge-pad);
 }
 
-.eyebrow{
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 13.5px;
-  font-weight: 700;
-  letter-spacing: .02em;
-  padding: 7px 14px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.14);
-  border: 1px solid rgba(255,255,255,0.22);
-  margin-bottom: 20px;
-}
-.dot{
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff5a5f;
-  box-shadow: 0 0 0 0 rgba(255,90,95,.7);
-  animation: ping 1.8s infinite;
-}
-@keyframes ping{
-  70%{ box-shadow: 0 0 0 9px rgba(255,90,95,0); }
-  100%{ box-shadow: 0 0 0 0 rgba(255,90,95,0); }
-}
-
 .copy h1{
   font-size: 58px;
   line-height: 1.08;
@@ -150,7 +124,7 @@
 
 /* 오른쪽 사진 콜라주: 배경은 흐리지만 여기서는 선명한 사진을 보여준다. */
 .collage{ position: relative; height: 500px; }
-.photo{ position: absolute; object-fit: cover; box-shadow: 0 18px 44px rgba(0,0,0,0.4); border: 3px solid rgba(255,255,255,0.9); }
+.photo{ position: absolute; object-fit: cover; box-shadow: 0 18px 44px rgba(0,0,0,0.4); }
 .p1{ left: 0; top: 36px; width: 48%; height: 320px; border-radius: 200px 200px 20px 20px; }
 .p2{ right: 0; top: 0; width: 48%; height: 220px; border-radius: 20px 20px 20px 96px; }
 .p3{ right: 5%; bottom: 0; width: 56%; height: 240px; border-radius: 20px 96px 20px 20px; }
@@ -183,5 +157,4 @@
 }
 @media (prefers-reduced-motion: reduce){
   .backdrop{ transition: none; }
-  .dot{ animation: none; }
 }
