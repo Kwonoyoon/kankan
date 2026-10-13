@@ -20,13 +20,28 @@ function useReviews() {
     return { avg: Math.round((sum / list.length) * 10) / 10, count: list.length };
   }
 
-  function addReview({ spaceId, rating, text, nickname }) {
-    const next = [...mine, { id: `rv-${Date.now()}`, spaceId, nickname, rating, text, date: todayISODate() }];
+  // userId가 없는 후기는 userId를 저장하기 전에 쓴 것이다. 그런 후기는 닉네임으로 내 것인지 판단한다.
+  function reviewsBy(user) {
+    if (!user) return [];
+    return mine
+      .filter((r) => (r.userId ? r.userId === user.id : r.nickname === user.nickname))
+      .sort((a, b) => b.date.localeCompare(a.date));
+  }
+
+  function addReview({ spaceId, rating, text, user }) {
+    const next = [...mine, { id: `rv-${Date.now()}`, spaceId, userId: user.id, nickname: user.nickname, rating, text, date: todayISODate() }];
     setMine(next);
     saveReviews(next);
   }
 
-  return { reviewsFor, ratingFor, addReview };
+  // 샘플 후기(mockData)는 mine에 없어서 지울 수 없다. 내가 쓴 후기만 지운다.
+  function removeReview(id) {
+    const next = mine.filter((r) => r.id !== id);
+    setMine(next);
+    saveReviews(next);
+  }
+
+  return { reviewsFor, ratingFor, reviewsBy, addReview, removeReview, allReviews: all };
 }
 
 export default useReviews;

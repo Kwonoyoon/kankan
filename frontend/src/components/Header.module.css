@@ -23,6 +23,7 @@
   height: 76px;
 }
 .logo{
+  cursor: pointer;
   font-size: 26px;
   font-weight: 700;
   font-family: var(--font-logo);

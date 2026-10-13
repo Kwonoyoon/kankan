@@ -182,23 +182,23 @@ export const drawerSections = [
     id: 'explore',
     label: '공간 둘러보기',
     links: [
-      { label: '밴드·합주 연습실', href: '#spaces' },
-      { label: '소규모 스터디', href: '#spaces' },
-      { label: '촬영·미팅룸', href: '#spaces' },
+      { label: '밴드·합주 연습실', href: 'concept:band' },
+      { label: '소규모 스터디', href: 'concept:study' },
+      { label: '촬영·미팅룸', href: 'concept:shoot' },
     ],
   },
   {
     id: 'howto',
     label: '이용 안내',
     links: [
-      { label: '예약 방법', href: '#spaces' },
+      { label: '예약 방법', href: 'spaces:all' },
       { label: '결제 및 환불 규정', href: '#' },
       { label: '정기권 안내', href: 'modal:pass' },
     ],
   },
   {
     id: 'mypage',
-    label: '내 예약',
+    label: '마이페이지',
   },
   {
     id: 'events',
@@ -208,7 +208,7 @@ export const drawerSections = [
     id: 'live',
     label: '실시간 정보',
     links: [
-      { label: '실시간 예약 현황', href: '#spaces' },
+      { label: '실시간 예약 현황', href: 'spaces:all' },
       { label: '지점별 혼잡도', href: '#' },
     ],
   },

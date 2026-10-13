@@ -8,7 +8,11 @@
 }
 .card:hover{ transform: translateY(-4px); }
 
+.titleLink{ color: inherit; text-decoration: none; }
+.titleLink:hover{ text-decoration: underline; }
+
 .thumb{
+  display: block;
   height: 160px;
   background-size: cover;
   background-position: center;

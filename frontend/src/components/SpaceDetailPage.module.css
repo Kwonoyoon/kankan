@@ -1,0 +1,104 @@
+.page{ padding: 104px 0 96px; background: var(--cream); min-height: 100vh; }
+
+.crumbs{ display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); margin-bottom: 16px; flex-wrap: wrap; }
+.crumbs button{ color: var(--ink-soft); font-size: 13px; }
+.crumbs button:hover{ color: var(--gold-deep); }
+.crumbs strong{ color: var(--ink); font-weight: 700; }
+
+.cover{
+  position: relative;
+  height: 440px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--line);
+  margin-bottom: 36px;
+}
+.nowBadge{
+  position: absolute; top: 16px; left: 16px;
+  background: var(--now-fill); color: #fff;
+  font-size: 13px; font-weight: 800;
+  padding: 6px 12px; border-radius: 20px;
+}
+
+.layout{ display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: start; }
+
+.branch{ font-size: 14px; font-weight: 700; color: var(--gold-deep); }
+.head h1{ font-size: 34px; letter-spacing: -0.03em; margin: 6px 0 8px; }
+.headline{ font-size: 17px; color: var(--ink-soft); margin-bottom: 14px; }
+.ratingLine{ display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink); margin-bottom: 14px; }
+.chips{ display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.chips li{ font-size: 13px; font-weight: 600; padding: 6px 12px; border-radius: 20px; background: var(--green-tint); color: var(--ink); }
+
+/* 스크롤해도 따라오는 탭. 헤더(76px) 바로 아래에 붙는다. */
+.tabs{
+  position: sticky; top: 76px; z-index: 5;
+  display: flex; gap: 6px; overflow-x: auto;
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+  margin: 28px 0 0;
+}
+.tabs a{ padding: 14px 16px; font-size: 15px; font-weight: 700; color: var(--ink-soft); white-space: nowrap; }
+.tabs a:hover{ color: var(--ink); }
+
+/* 탭을 눌러 이동했을 때 제목이 헤더와 탭에 가리지 않게 위쪽 여백을 둔다. */
+.block{ padding: 36px 0 8px; scroll-margin-top: 140px; border-bottom: 1px solid var(--line); }
+.block h2{ font-size: 22px; margin-bottom: 16px; letter-spacing: -0.02em; }
+.block p{ font-size: 15.5px; line-height: 1.75; color: var(--ink); margin-bottom: 12px; }
+.count{ font-size: 16px; color: var(--ink-soft); font-weight: 600; margin-left: 4px; }
+
+.facilities{ display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; list-style: none; margin-bottom: 20px; }
+.facilities li{ background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 14px; font-weight: 600; }
+.info{ display: grid; grid-template-columns: 90px 1fr; gap: 10px 16px; font-size: 15px; margin-bottom: 20px; }
+.info dt{ color: var(--ink-soft); font-weight: 600; }
+
+.bullets{ padding-left: 20px; margin-bottom: 20px; }
+.bullets li{ font-size: 15px; line-height: 1.7; margin-bottom: 6px; }
+
+.refund{ width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 15px; }
+.refund th, .refund td{ padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; }
+.refund th{ font-weight: 600; color: var(--ink-soft); }
+.refund td{ font-weight: 700; }
+
+.summary{ display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.summary strong{ font-size: 30px; }
+
+.form{ background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.form h3{ font-size: 15px; }
+.form textarea{
+  font: inherit; font-size: 14px; color: var(--ink);
+  border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+  background: var(--cream); resize: vertical;
+}
+.error{ color: var(--err-fg); font-size: 13px; }
+.submitBtn{ align-self: flex-end; background: var(--ink); color: var(--cream); padding: 10px 22px; border-radius: 10px; font-weight: 700; font-size: 14px; }
+.submitBtn:hover{ background: var(--gold-deep); }
+
+.reviewList{ list-style: none; margin-bottom: 28px; }
+.reviewList li{ padding: 16px 0; border-bottom: 1px solid var(--line); }
+.reviewList li p{ margin: 8px 0 0; font-size: 15px; }
+.meta{ display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.name{ font-weight: 700; }
+.date{ color: var(--ink-soft); }
+.empty{ color: var(--ink-soft); font-size: 14px; }
+
+/* 오른쪽 예약 카드. 스크롤해도 화면에 남아 있어서 어디서든 바로 예약할 수 있다. */
+.side{ position: sticky; top: 96px; }
+.card{ background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+.price{ font-size: 22px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
+.field{ display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: var(--ink-soft); margin-bottom: 14px; }
+.field input{ font: inherit; font-size: 15px; font-weight: 500; color: var(--ink); padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--cream); }
+.reserve{ width: 100%; background: var(--gold); color: var(--on-gold); padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 800; }
+.reserve:hover{ filter: brightness(1.08); }
+.sideNote{ font-size: 12.5px; color: var(--ink-soft); margin-top: 12px; text-align: center; }
+
+.notFound{ padding: 80px 0 24px; text-align: center; color: var(--ink-soft); }
+.backBtn{ display: block; margin: 0 auto; padding: 10px 20px; border: 1px solid var(--line); border-radius: 10px; font-weight: 600; }
+
+@media (max-width: 900px){
+  .layout{ grid-template-columns: 1fr; gap: 24px; }
+  .cover{ height: 280px; }
+  /* 좁은 화면에서는 예약 카드를 맨 아래로 내리지 않고 본문 앞에 둔다. 예약이 이 화면의 목적이라서다. */
+  .side{ position: static; order: -1; }
+  .head h1{ font-size: 28px; }
+}

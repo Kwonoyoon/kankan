@@ -11,7 +11,14 @@ import A11yWidget from './components/A11yWidget';
 import CookieBar from './components/CookieBar';
 import PassPlansModal from './components/PassPlansModal';
 import SpacesModal from './components/SpacesModal';
-import ReviewsModal from './components/ReviewsModal';
+import PaymentModal from './components/PaymentModal';
+import SpaceDetailPage from './components/SpaceDetailPage';
+import MyPage from './components/MyPage';
+import HowItWorks from './components/HowItWorks';
+import BranchShowcase from './components/BranchShowcase';
+import RecentReviews from './components/RecentReviews';
+import PassBanner from './components/PassBanner';
+import Faq from './components/Faq';
 import LoginModal from './components/LoginModal';
 import Intro from './components/Intro';
 import AdminPage from './components/AdminPage';
@@ -22,12 +29,14 @@ import useCoupons from './hooks/useCoupons';
 import useReviews from './hooks/useReviews';
 import useSpaces from './hooks/useSpaces';
 import useCatalog from './hooks/useCatalog';
+import useRoute from './hooks/useRoute';
 import useNow from './hooks/useNow';
 import useBookedSlots from './hooks/useBookedSlots';
 import { dateToISO, nextSlotTime, isSlotAvailable } from './lib/reservations';
 import { AppProvider } from './AppContext';
 import { shouldShowIntro, markIntroSeen } from './lib/intro';
 import { drawerSections } from './data/mockData';
+import { spacePath } from './lib/route';
 
 // 라우터 없이 주소 뒤의 #admin 만 보고 관리자 화면을 보여준다. (# 뒤는 서버로 전송되지 않아 nginx 설정이 필요 없다)
 const ADMIN_HASH = '#admin';
@@ -40,7 +49,8 @@ function App() {
   const [spacesModalOpen, setSpacesModalOpen] = useState(false);
   const [spacesFilters, setSpacesFilters] = useState(null);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const [reviewSpace, setReviewSpace] = useState(null);
+  const [paymentPlanId, setPaymentPlanId] = useState(null);
+  const { route, navigate } = useRoute();
   const [pendingAction, setPendingAction] = useState(null);
   const [activeConcept, setActiveConcept] = useState(null);
   const { user, login, signup, logout } = useAuth();
@@ -48,7 +58,7 @@ function App() {
   const { activePlanId, subscribe, cancelSubscription } = useSubscription();
   const [isAdminRoute, setIsAdminRoute] = useState(() => window.location.hash === ADMIN_HASH);
   const { claimed, availableCoupons, claimCoupon, consumeCoupon } = useCoupons();
-  const { reviewsFor, ratingFor, addReview } = useReviews();
+  const { reviewsFor, ratingFor, reviewsBy, addReview, removeReview, allReviews } = useReviews();
   const spaces = useSpaces(isAdminRoute);
   const { concepts, branches, branchName } = useCatalog(isAdminRoute);
 
@@ -73,6 +83,23 @@ function App() {
   function openPassPlans() {
     setDrawerOpen(false);
     setPassModalOpen(true);
+  }
+
+  // 화면을 옮길 때는 떠 있던 창(드로어·공간 목록)을 닫는다. 안 닫으면 새 화면 위에 이전 창이 그대로 남는다.
+  function goTo(path) {
+    setDrawerOpen(false);
+    setSpacesModalOpen(false);
+    navigate(path);
+  }
+
+  const openSpace = (spaceId, hash = '') => goTo(`${spacePath(spaceId)}${hash}`);
+  const goHome = () => goTo('/');
+  const openMyPage = () => goTo('/mypage');
+
+  // 정기권 구독은 플랜을 고른 뒤 결제 창을 거친다. 결제가 끝난 뒤에만 구독 상태를 바꾼다.
+  function startPayment(planId) {
+    setPassModalOpen(false);
+    setPaymentPlanId(planId);
   }
 
   // 일반 "예약하기" 버튼들은 인자 없이 호출한다. onClick={openSpaces}처럼 쓰면 클릭 이벤트 객체가 인자로 들어오므로,
@@ -132,14 +159,18 @@ function App() {
     nowTime,
     requireAuth,
     reservations,
+    cancelReservation,
     availableCoupons,
     claimed,
     claimCoupon,
     confirmBooking,
     reviewsFor,
     ratingFor,
+    reviewsBy,
     addReview,
-    openReviews: setReviewSpace,
+    removeReview,
+    allReviews,
+    openSpace,
   };
 
   if (isAdminRoute) {
@@ -155,29 +186,44 @@ function App() {
 
   return (
     <AppProvider value={appValue}>
-      <Header onMenuOpen={() => openDrawer()} onOpenSpaces={openSpaces} user={user} onLogout={logout} onLoginClick={() => setLoginModalOpen(true)} onAdmin={() => { window.location.hash = ADMIN_HASH; }} />
+      <Header
+        solid={route.name !== 'home'}
+        onHome={goHome}
+        onMenuOpen={() => openDrawer()}
+        onOpenSpaces={openSpaces}
+        user={user}
+        onLogout={logout}
+        onLoginClick={() => setLoginModalOpen(true)}
+        onMyPage={openMyPage}
+        onAdmin={() => { window.location.hash = ADMIN_HASH; }}
+      />
       <Drawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         activeId={drawerTab}
         onTabChange={setDrawerTab}
-        reservations={reservations}
-        onCancelReservation={cancelReservation}
-        activePlanId={activePlanId}
-        onCancelSubscription={cancelSubscription}
         onOpenPassPlans={openPassPlans}
         onOpenSpaces={openSpaces}
+        onOpenSpacesWith={openSpacesWith}
+        onOpenMyPage={openMyPage}
       />
       {passModalOpen && (
         <PassPlansModal
           activePlanId={activePlanId}
-          onSubscribe={(planId) => requireAuth(() => subscribe(planId))}
+          onSubscribe={(planId) => requireAuth(() => startPayment(planId))}
           onCancel={cancelSubscription}
           onClose={() => setPassModalOpen(false)}
         />
       )}
+      {paymentPlanId && (
+        <PaymentModal
+          planId={paymentPlanId}
+          onPaid={subscribe}
+          onBack={() => { setPaymentPlanId(null); setPassModalOpen(true); }}
+          onClose={() => setPaymentPlanId(null)}
+        />
+      )}
       {spacesModalOpen && <SpacesModal initialFilters={spacesFilters} onClose={() => setSpacesModalOpen(false)} />}
-      {reviewSpace && <ReviewsModal space={reviewSpace} onClose={() => setReviewSpace(null)} />}
       {loginModalOpen && (
         <LoginModal
           onSubmit={handleAuthSubmit}
@@ -185,13 +231,33 @@ function App() {
         />
       )}
 
-      <main>
-        <Hero onOpenPass={openPassPlans} onSearch={openSpacesWith} />
-        <ConceptPills activeConcept={activeConcept} onSelect={setActiveConcept} />
-        <Stats />
-        <SpaceGrid activeConcept={activeConcept} onOpenSpaces={openSpaces} />
-        <Extras />
-      </main>
+      {route.name === 'space' && <SpaceDetailPage spaceId={route.spaceId} onBack={goHome} />}
+
+      {route.name === 'mypage' && (
+        <MyPage
+          activePlanId={activePlanId}
+          onCancelSubscription={cancelSubscription}
+          onOpenPassPlans={openPassPlans}
+          onOpenSpace={openSpace}
+          onOpenSpaces={openSpaces}
+          onLogin={() => setLoginModalOpen(true)}
+        />
+      )}
+
+      {route.name === 'home' && (
+        <main>
+          <Hero onOpenPass={openPassPlans} onSearch={openSpacesWith} />
+          <ConceptPills activeConcept={activeConcept} onSelect={setActiveConcept} />
+          <Stats />
+          <SpaceGrid activeConcept={activeConcept} onOpenSpaces={openSpaces} />
+          <BranchShowcase onSelectBranch={(branchId) => openSpacesWith({ branch: branchId })} />
+          <HowItWorks />
+          <RecentReviews />
+          <PassBanner onOpenPass={openPassPlans} />
+          <Faq />
+          <Extras />
+        </main>
+      )}
 
       <Footer onOpenDrawer={openDrawer} onOpenPassPlans={openPassPlans} onOpenSpaces={openSpaces} />
       <A11yWidget />

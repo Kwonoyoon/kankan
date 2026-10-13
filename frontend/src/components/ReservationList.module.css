@@ -11,6 +11,8 @@
 }
 .space{ font-size: 15px; font-weight: 600; margin-bottom: 4px; }
 .time{ font-size: 13px; color: var(--ink-soft); }
+.spaceLink{ font: inherit; font-weight: 800; }
+.spaceLink:hover{ color: var(--gold-deep); text-decoration: underline; }
 
 .cancelBtn{
   flex-shrink: 0;

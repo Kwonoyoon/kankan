@@ -1,0 +1,41 @@
+.overlay{
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(0,0,0,0.55);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal{
+  position: relative;
+  width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto;
+  background: var(--card); color: var(--ink);
+  border-radius: 20px; padding: 28px;
+}
+.closeBtn{ position: absolute; top: 16px; right: 16px; }
+.modal h2{ font-size: 22px; letter-spacing: -0.02em; }
+.demo{ font-size: 12.5px; color: var(--gold-deep); font-weight: 600; margin: 6px 0 18px; }
+
+.order{ background: var(--cream); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 18px; }
+.order h3{ font-size: 14px; margin-bottom: 10px; }
+.order dl{ display: grid; grid-template-columns: 84px 1fr; gap: 8px 12px; font-size: 14px; }
+.order dt{ color: var(--ink-soft); }
+.total{ display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); margin-top: 14px; padding-top: 14px; }
+.total strong{ font-size: 22px; font-weight: 800; }
+
+.methods{ border: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.methods legend{ font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.methods label{ display: flex; align-items: center; gap: 8px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.methods .picked{ border-color: var(--ink); background: var(--green-tint); }
+
+.agree{ display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.5; color: var(--ink-soft); margin-bottom: 14px; cursor: pointer; }
+.agree input{ margin-top: 3px; }
+.error{ color: var(--err-fg); font-size: 13px; margin-bottom: 10px; }
+
+.actions{ display: flex; gap: 10px; }
+.backBtn{ border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 16px; font-weight: 700; font-size: 14px; white-space: nowrap; }
+.payBtn{ flex: 1; background: var(--gold); color: var(--on-gold); border-radius: 12px; padding: 14px; font-weight: 800; font-size: 16px; }
+.payBtn:disabled, .backBtn:disabled{ opacity: .6; cursor: default; }
+
+.done{ text-align: center; padding: 12px 0 4px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.done .payBtn{ margin-top: 12px; align-self: stretch; flex: none; }
+.check{ width: 56px; height: 56px; border-radius: 50%; background: var(--green-tint); color: var(--ok-fg); font-size: 28px; display: flex; align-items: center; justify-content: center; font-weight: 800; }
+.muted{ color: var(--ink-soft); font-size: 13.5px; }

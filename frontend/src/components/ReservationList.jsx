@@ -6,7 +6,8 @@ function formatDate(isoDate, lang) {
   return date.toLocaleDateString(lang === 'en' ? 'en-US' : 'ko-KR', { month: 'long', day: 'numeric', weekday: 'short' });
 }
 
-function ReservationList({ reservations, onCancel }) {
+// onOpenSpace가 있으면 공간 이름이 상세 페이지로 가는 링크가 된다. (마이페이지에서 예약한 곳을 다시 보러 가는 용도)
+function ReservationList({ reservations, onCancel, onOpenSpace }) {
   const { t, lang } = useLanguage();
 
   if (reservations.length === 0) {
@@ -18,7 +19,12 @@ function ReservationList({ reservations, onCancel }) {
       {reservations.map((r) => (
         <li key={r.id} className={styles.item}>
           <div>
-            <div className={styles.space}>{t(r.branchName)} · {t(r.spaceName)}</div>
+            <div className={styles.space}>
+              {t(r.branchName)} ·{' '}
+              {onOpenSpace ? (
+                <button type="button" className={styles.spaceLink} onClick={() => onOpenSpace(r.spaceId)}>{t(r.spaceName)}</button>
+              ) : t(r.spaceName)}
+            </div>
             <div className={styles.time}>{formatDate(r.date, lang)} {r.time}</div>
           </div>
           <button className={styles.cancelBtn} onClick={() => onCancel(r.id)}>{t('취소')}</button>
